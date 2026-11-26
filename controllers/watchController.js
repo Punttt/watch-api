@@ -2,7 +2,7 @@
 const Watch = require('../models/watchModel');
 
 // GET /watches
-async function getAllWatch(request, reply) {
+async function getAllWatches(request, reply) {
     const watches = await Watch.getAll();
     return watches;
 }
@@ -18,4 +18,4 @@ async function getWatchById(request, reply) {
     return watch;
 }
 
-module.exports = { getAllWatch, getWatchById };
+module.exports = { getAllWatches, getWatchById };

@@ -6,6 +6,9 @@ fastify.get('/', async () => {
   return { message: 'Watch API fungerar!' };
 });
 
+// Registrera klock-routes
+fastify.register(require('./routes/watchRoutes'));
+
 // Starta servern
 const start = async () => {
   try {
