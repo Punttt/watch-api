@@ -18,4 +18,13 @@ async function getWatchById(request, reply) {
     return watch;
 }
 
-module.exports = { getAllWatches, getWatchById };
+// POST /watches
+async function createWatch(request, reply) {
+    const { brand, model, price, is_owned } = request.body;
+    const id = await Watch.create(brand, model, price, is_owned);
+
+    // 201 = Created
+    return reply.code(201).send({ message: 'Klockan har lagts till', id, brand, model, price, is_owned });
+}
+
+module.exports = { getAllWatches, getWatchById, createWatch };
