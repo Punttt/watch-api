@@ -28,7 +28,15 @@ async function update(id, brand, model, price, is_owned) {
         'UPDATE watches SET brand = ?, model = ?, price = ?, is_owned = ? WHERE id = ?',
         [brand, model, price, is_owned, id]
     );
-    return result.affectedRows;
+    return result.affectedRows; // <- om ingen klocka med angivet id finns
 }
 
-module.exports = { getAll, getById, create, update };
+// DELETE - Ta bort rad med angivet id
+async function remove(id) {
+    const [result] = await db.query(
+        'DELETE FROM watches WHERE id = ?', [id]
+    );
+    return result.affectedRows; // <- om ingen klocka med angivet id finns
+}
+
+module.exports = { getAll, getById, create, update, remove };

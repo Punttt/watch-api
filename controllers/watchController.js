@@ -40,4 +40,16 @@ async function updateWatch(request, reply) {
     return { message: 'Klockan har uppdaterats', id: Number(id), brand, model, price, is_owned };
 }
 
-module.exports = { getAllWatches, getWatchById, createWatch, updateWatch };
+// DELETE /watches/:id
+async function deleteWatch(request, reply) {
+    const {id} = request.params;
+    const affectedRows = await Watch.remove(id);
+
+    if( affectedRows === 0 ) {
+        return reply.code(404).send({ error: `Ingen klocka med id ${id} hittades` });
+    }
+
+    return { message: `Klockan med id ${id} har raderats` };
+}
+
+module.exports = { getAllWatches, getWatchById, createWatch, updateWatch, deleteWatch };

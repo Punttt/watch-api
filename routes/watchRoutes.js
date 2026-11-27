@@ -18,10 +18,9 @@ const watchSchema = {
 async function watchRoutes(fastify) {
   fastify.get('/watches', watchController.getAllWatches);
   fastify.get('/watches/:id', watchController.getWatchById);
-
   fastify.post('/watches', { schema: watchSchema }, watchController.createWatch);
-
   fastify.put('/watches/:id', { schema: watchSchema }, watchController.updateWatch);
+  fastify.delete('/watches/:id', watchController.deleteWatch);
 }
 
 module.exports = watchRoutes;
