@@ -22,4 +22,13 @@ async function create(brand, model, price, is_owned) {
     return result.insertId; // <-- ID:t som databasen gav den nyinlagda klockan.
 }
 
-module.exports = { getAll, getById, create };
+// PUT - Uppdatera befintlig klocka
+async function update(id, brand, model, price, is_owned) {
+    const [result] = await db.query(
+        'UPDATE watches SET brand = ?, model = ?, price = ?, is_owned = ? WHERE id = ?',
+        [brand, model, price, is_owned, id]
+    );
+    return result.affectedRows;
+}
+
+module.exports = { getAll, getById, create, update };
